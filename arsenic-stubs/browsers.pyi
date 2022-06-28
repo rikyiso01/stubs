@@ -1,0 +1,6 @@
+from typing import Any
+
+class Browser: ...
+
+class Chrome(Browser):
+    def __init__(self, **kwargs: Any) -> None: ...
