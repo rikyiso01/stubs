@@ -8,9 +8,7 @@ _T = TypeVar("_T")
 type = dataclass
 
 def field(
-    resolver: Callable[..., _T],
-    *args: None,
-    permission_classes: Iterable[Type[BasePermission]]
+    resolver: Callable[..., _T], *, permission_classes: Iterable[Type[BasePermission]]
 ) -> _T: ...
 
 class Schema:

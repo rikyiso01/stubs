@@ -1,9 +1,10 @@
-from pydantic import BaseModel
 from ..sql.schema import MetaData
-from .. import CheckConstraint, Table
+from .. import CheckConstraint, Table, Column
+from typing_extensions import dataclass_transform
 
-class Base(BaseModel):
-    metadata: MetaData
+@dataclass_transform(kw_only_default=True, field_specifiers=(Column,))
+class Base:
+    metadata: MetaData = ...
     __tablename__: str
-    __table_args__: tuple[CheckConstraint, ...]
-    __table__: Table
+    __table_args__: tuple[CheckConstraint, ...] = ...
+    __table__: Table = ...

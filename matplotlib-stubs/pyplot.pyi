@@ -3,7 +3,7 @@ from typing import Literal, Any, overload, TypeVar
 
 _T = TypeVar("_T", bound=DTypeLike)
 
-def show(*args: None, block: bool = ...) -> None: ...
+def show(*, block: bool = ...) -> None: ...
 def hist(
     x: ArrayLike[_T],
     bins: int = ...,
@@ -25,14 +25,14 @@ def xlabel(
     xlabel: str,
     fontdict: dict[str, str] = ...,  # incomplete
     labelpad: float = ...,
-    *args: None,
+    *,
     loc: Literal["left", "mid", "right"] = ...,
 ) -> None: ...
 def ylabel(
     ylabel: str,
     fontdict: dict[str, str] = ...,  # incomplete
     labelpad: float = ...,
-    *args: None,
+    *,
     loc: Literal["left", "mid", "right"] = ...,
 ) -> None: ...
 def title(
@@ -40,13 +40,13 @@ def title(
     fontdict: dict[str, str] = ...,  # incomplete
     loc: Literal["left", "mid", "right"] = ...,
     pad: float = ...,
-    *args: None,
+    *,
     y: float = ...,
 ) -> None: ...
 @overload
 def stem(
     heads: ArrayLike[_T],
-    *args: None,
+    *,
     linefmt: str = ...,
     markerfmt: str = ...,
     basefmt: str = ...,
@@ -60,7 +60,7 @@ def stem(
 def stem(
     locks: ArrayLike[_T],
     heads: ArrayLike[_T] = ...,
-    *args: None,
+    *,
     linefmt: str = ...,
     markerfmt: str = ...,
     basefmt: str = ...,
@@ -91,7 +91,7 @@ def bar(
     height: ArrayLike[_T],
     width: ArrayLike[_T] = ...,
     bottom: ArrayLike[_T] = ...,
-    *args: None,
+    *,
     align: Literal["center", "edge"] = ...,
     data: Any = ...,  # incomplete
 ) -> None: ...
@@ -107,4 +107,4 @@ def legend(labels: list[str] = ..., /) -> None: ...
 @overload
 def legend(handles: list[Any], labels: list[str], /) -> None: ...
 @overload
-def legend(*args: None, handles: list[Any]) -> None: ...
+def legend(*, handles: list[Any]) -> None: ...

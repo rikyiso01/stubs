@@ -97,7 +97,7 @@ class Session:
         self,
         name: str,
         value: str,
-        *args: None,
+        *,
         path: str = ...,
         domain: str = ...,
         secure: bool = ...,

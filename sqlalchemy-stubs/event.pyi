@@ -12,3 +12,17 @@ def listens_for(
     ],
     None,
 ]: ...
+def listen(
+    engine: Engine,
+    event: Literal["before_cursor_execute"],
+    fn: Callable[
+        [Any, Any, str, dict[str, Any] | tuple[dict[str, Any], ...], Any, Any], Any
+    ],
+) -> None: ...
+def remove(
+    engine: Engine,
+    event: Literal["before_cursor_execute"],
+    fn: Callable[
+        [Any, Any, str, dict[str, Any] | tuple[dict[str, Any], ...], Any, Any], Any
+    ],
+) -> None: ...
