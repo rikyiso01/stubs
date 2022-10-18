@@ -17,6 +17,8 @@ packages = [
     {include = "httpx-stubs"},
     {include = "jwt-stubs"},
     {include = "matplotlib-stubs"},
+    {include = "motor-stubs"},
+    {include = "MySQLdb-stubs"},
     {include = "numba-stubs"},
     {include = "numpy-stubs"},
     {include = "pandas-stubs"},
@@ -65,6 +67,7 @@ scipy = "^1.9.1"
 SQLAlchemy = "^1.4.41"
 strawberry-graphql = "^0.132.1"
 fastapi = "^0.85.0"
+mysql = "^0.0.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
