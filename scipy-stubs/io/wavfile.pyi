@@ -1,0 +1,3 @@
+from numpy.typing import NDArray
+
+def read(filename: str) -> tuple[int, NDArray[float]]: ...

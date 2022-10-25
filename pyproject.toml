@@ -15,6 +15,7 @@ packages = [
     {include = "faker-stubs"},
     {include = "gdown-stubs"},
     {include = "httpx-stubs"},
+    {include = "IPython-stubs"},
     {include = "jwt-stubs"},
     {include = "matplotlib-stubs"},
     {include = "motor-stubs"},

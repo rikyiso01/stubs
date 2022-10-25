@@ -1,5 +1,5 @@
 from typing import TypeVar
-from .typing import DTypeLike, NDArray, ArrayLike
+from numpy.typing import DTypeLike, NDArray, ArrayLike
 
 _T = TypeVar("_T", bound=DTypeLike)
 
