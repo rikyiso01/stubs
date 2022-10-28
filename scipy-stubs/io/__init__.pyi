@@ -1,0 +1,3 @@
+from numpy.typing import NDArray
+
+def loadmat(file_name: str) -> dict[str, NDArray[float]]: ...
