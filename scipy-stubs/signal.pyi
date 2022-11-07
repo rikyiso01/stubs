@@ -27,3 +27,13 @@ def find_peaks(x: ArrayLike[float], height: int = ...) -> tuple[NDArray[int], No
 def filtfilt(
     b: ArrayLike[float], a: ArrayLike[float], x: ArrayLike[float]
 ) -> NDArray[float]: ...
+def convolve(
+    in1: ArrayLike[float],
+    in2: ArrayLike[float],
+    mode: Literal["full", "valid", "same"] = ...,
+) -> NDArray[float]: ...
+def convolve2d(
+    in1: ArrayLike[float],
+    in2: ArrayLike[float],
+    mode: Literal["full", "valid", "same"] = ...,
+) -> NDArray[float]: ...

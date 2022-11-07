@@ -1,0 +1,3 @@
+from numpy.typing import NDArray
+
+def astronaut() -> NDArray[int]: ...

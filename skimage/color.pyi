@@ -1,0 +1,3 @@
+from numpy.typing import ArrayLike, NDArray
+
+def rgb2hsv(rgb: ArrayLike[int]) -> NDArray[int]: ...

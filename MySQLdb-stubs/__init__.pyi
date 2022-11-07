@@ -1,7 +1,8 @@
 from ._mysql import result
+from contextlib import AbstractContextManager
 
 def connect(*, host: str, port: int, user: str, passwd: str) -> Connection: ...
 
-class Connection:
+class Connection(AbstractContextManager[Connection]):
     def query(self, query: str) -> None: ...
     def store_result(self) -> result: ...
