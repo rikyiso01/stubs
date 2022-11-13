@@ -1,5 +1,5 @@
 from typing import Any, Literal
-from .engine.base import Engine
+from sqlalchemy.engine.base import Engine
 from collections.abc import Callable
 
 def listens_for(

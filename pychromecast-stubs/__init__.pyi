@@ -1,5 +1,5 @@
-from .controllers.media import MediaStatus
-from .controllers import MediaController
+from pychromecast.controllers.media import MediaStatus
+from pychromecast.controllers import MediaController
 
 class Chromecast:
     def __init__(

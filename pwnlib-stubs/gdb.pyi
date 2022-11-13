@@ -1,4 +1,4 @@
-from .tubes.process import process
+from pwnlib.tubes.process import process
 
 class Gdb: ...
 

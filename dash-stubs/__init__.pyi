@@ -1,8 +1,7 @@
 from typing import Any, TypeVar
-from .development.base_component import Component
-from .dependencies import Input, Output
+from dash.development.base_component import Component
+from dash.dependencies import Input, Output,DashDependency
 from collections.abc import Callable
-from .dependencies import DashDependency
 
 _T = TypeVar("_T", bound=Callable[..., Any])
 

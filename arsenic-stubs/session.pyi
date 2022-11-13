@@ -1,7 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 from typing import Any
-from .utils import Rect
+from arsenic.utils import Rect
 from arsenic.constants import SelectorType
 
 class Element:

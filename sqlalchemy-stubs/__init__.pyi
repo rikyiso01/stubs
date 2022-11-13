@@ -1,7 +1,7 @@
 from datetime import date, datetime, time, timedelta
 from typing import Callable, Optional, TypeVar, Any, Literal, overload
-from .engine.base import Engine
-from .sql.selectable import Select
+from sqlalchemy.engine.base import Engine
+from sqlalchemy.sql.selectable import Select
 
 _T = TypeVar("_T")
 

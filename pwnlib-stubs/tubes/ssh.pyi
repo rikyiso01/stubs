@@ -1,4 +1,4 @@
-from .tube import tube
+from pwnlib.tubes.tube import tube
 
 class ssh(tube):
     def __init__(

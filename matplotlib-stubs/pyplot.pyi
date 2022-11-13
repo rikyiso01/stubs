@@ -1,49 +1,29 @@
 from numpy.typing import ArrayLike, DTypeLike, NDArray
 from typing import Literal, Any, overload, TypeVar
 from matplotlib.colors import Colormap
+from matplotlib.figure import Figure
+from matplotlib.axes import Axes
+from matplotlib import cm as cm
 
 _T = TypeVar("_T", bound=DTypeLike)
 
+_axes: Axes
+_figure: Figure
+
+hist = _axes.hist
+ticklabel_format = _axes.ticklabel_format
+xlabel = _axes.set_xlabel
+ylabel = _axes.set_ylabel
+xlim = _axes.set_xlim
+ylim = _axes.set_ylim
+xticks = _axes.set_xticks
+yticks = _axes.set_yticks
+plot = _axes.plot
+title = _axes.set_title
+subplot = _figure.add_subplot
+tight_layout = _figure.tight_layout
+
 def show(*, block: bool = ...) -> None: ...
-def hist(
-    x: ArrayLike[_T],
-    bins: int = ...,
-    range: tuple[int, int] = ...,
-    density: bool = ...,
-    weights: ArrayLike[_T] = ...,
-    cumulative: bool | Literal[-1] = ...,
-    bottom: ArrayLike[_T] = ...,
-    histtype: Literal["bar", "barstacked", "step", "stepfilled"] = ...,
-    align: Literal["left", "mid", "right"] = ...,
-    orientation: Literal["vertical", "horizontal"] = ...,
-    rwidth: float = ...,
-    log: bool = ...,
-    color: ArrayLike[_T] = ...,  # incomplete
-    label: str = ...,
-    stacked: bool = ...,
-) -> None: ...
-def xlabel(
-    xlabel: str,
-    fontdict: dict[str, str] = ...,  # incomplete
-    labelpad: float = ...,
-    *,
-    loc: Literal["left", "mid", "right"] = ...,
-) -> None: ...
-def ylabel(
-    ylabel: str,
-    fontdict: dict[str, str] = ...,  # incomplete
-    labelpad: float = ...,
-    *,
-    loc: Literal["left", "mid", "right"] = ...,
-) -> None: ...
-def title(
-    label: str,
-    fontdict: dict[str, str] = ...,  # incomplete
-    loc: Literal["left", "mid", "right"] = ...,
-    pad: float = ...,
-    *,
-    y: float = ...,
-) -> None: ...
 @overload
 def stem(
     heads: ArrayLike[_T],
@@ -79,14 +59,6 @@ def step(
     data: Any = ...,  # incomplete
     where: Literal["pre", "post", "mid"] = ...,
 ) -> None: ...
-@overload
-def xlim(arg: tuple[float, float], /) -> None: ...
-@overload
-def xlim(left: float = ..., right: float = ...) -> None: ...
-@overload
-def ylim(arg: tuple[float, float], /) -> None: ...
-@overload
-def ylim(left: float, right: float = ..., /) -> None: ...
 def bar(
     x: ArrayLike[_T],
     height: ArrayLike[_T],
@@ -96,26 +68,14 @@ def bar(
     align: Literal["center", "edge"] = ...,
     data: Any = ...,  # incomplete
 ) -> None: ...
-def plot(
-    *args: ArrayLike[_T] | str,
-    scalex: bool = ...,
-    scaley: bool = ...,
-    data: Any = ...,  # incomplete
-    label: str = ...,
-) -> None: ...
 @overload
 def legend(labels: list[str] = ..., /) -> None: ...
 @overload
 def legend(handles: list[Any], labels: list[str], /) -> None: ...
 @overload
 def legend(*, handles: list[Any]) -> None: ...
-def figure(*, figsize: tuple[float, float] = ...) -> None: ...
-@overload
-def subplot(nrows: int, ncols: int, index: int) -> None: ...
-@overload
-def subplot(pos: int) -> None: ...
+def figure(*, figsize: tuple[float, float] = ...) -> Figure: ...
 def grid() -> None: ...
-def tight_layout() -> None: ...
 def savefig(fname: str, *, type: Literal[".png"] = ...) -> None: ...
 def specgram(
     x: ArrayLike[float], NFFT: int = ..., Fs: float = ...
@@ -127,3 +87,13 @@ def imshow(
     cmap: Literal["gray", "Reds", "Greens", "Blues", "hsv"] | Colormap | None = ...,
 ) -> None: ...
 def axis(option: Literal["off"], /) -> None: ...
+@overload
+def subplots() -> tuple[Figure, Axes]: ...
+@overload
+def subplots(nrows: int) -> tuple[Figure, tuple[Axes, Axes]]: ...
+@overload
+def subplots(*, ncols: int) -> tuple[Figure, tuple[Axes, Axes]]: ...
+@overload
+def subplots(
+    nrows: int, ncols: int
+) -> tuple[Figure, tuple[tuple[Axes, Axes], tuple[Axes, Axes]]]: ...

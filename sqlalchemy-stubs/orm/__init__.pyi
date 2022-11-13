@@ -1,13 +1,14 @@
-from ..engine.result import ScalarResult
-from ..engine.cursor import CursorResult
-from ..engine.base import Engine
-from .decl_api import Base
+from sqlalchemy.engine.result import ScalarResult
+from sqlalchemy.engine.cursor import CursorResult
+from sqlalchemy.engine.base import Engine
+from sqlalchemy.orm.decl_api import Base
 from contextlib import AbstractContextManager
 from typing import Type, Any
-from ..sql.elements import TextClause
-from ..sql.selectable import Select
-from .query import Query
-from .. import Table
+from sqlalchemy.sql.elements import TextClause
+from sqlalchemy.sql.selectable import Select
+from sqlalchemy.orm.query import Query
+from sqlalchemy import Table
+from types import TracebackType
 
 _Stmt = TextClause | Select
 
@@ -21,5 +22,12 @@ class Session(AbstractContextManager[Session]):
     def scalars(self, statement: _Stmt) -> ScalarResult: ...
     def query(self, table: Table) -> Query: ...
     def flush(self) -> None: ...
+    def __exit__(
+        self,
+        __exc_type: Type[BaseException] | None,
+        __exc_value: BaseException | None,
+        __traceback: TracebackType | None,
+        /,
+    ) -> (bool | None): ...
 
 def declarative_base() -> Type[Base]: ...

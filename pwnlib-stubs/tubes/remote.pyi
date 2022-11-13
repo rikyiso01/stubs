@@ -1,4 +1,4 @@
-from .tube import tube
+from pwnlib.tubes.tube import tube
 from typing import Literal, Any
 from socket import socket
 from ssl import SSLContext

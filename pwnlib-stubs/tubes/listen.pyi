@@ -1,4 +1,4 @@
-from .tube import tube
+from pwnlib.tubes.tube import tube
 from typing import Literal
 
 class listen(tube):

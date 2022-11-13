@@ -1,3 +1,3 @@
-from ..engine.interfaces import Dialect
+from sqlalchemy.engine.interfaces import Dialect
 
 def dialect() -> Dialect: ...

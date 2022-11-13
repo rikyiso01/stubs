@@ -1,1 +1,1 @@
-from . import display as display
+from IPython import display as display

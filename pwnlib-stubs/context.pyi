@@ -1,4 +1,4 @@
-from .elf import ELF
+from pwnlib.elf import ELF
 
 class ContextType:
     binary: ELF

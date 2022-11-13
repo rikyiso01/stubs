@@ -1,4 +1,4 @@
-from .typing import NDArray
+from numpy.typing import NDArray
 
 def randint(
     low: int, high: int = ..., size: int | tuple[int, ...] = ...

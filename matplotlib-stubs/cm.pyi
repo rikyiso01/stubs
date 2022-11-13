@@ -1,3 +1,4 @@
 from matplotlib.colors import LinearSegmentedColormap
 
 gist_gray: LinearSegmentedColormap
+gray: LinearSegmentedColormap

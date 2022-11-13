@@ -1,5 +1,5 @@
 from typing import Type, overload
-from .blockalgo import MODE_CBC as cbc, MODE_ECB as ecb
+from Crypto.Cipher.blockalgo import MODE_CBC as cbc, MODE_ECB as ecb
 
 class DESCipher:
     def encrypt(self, plaintext: bytes) -> bytes: ...

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Type, TypeVar, Iterable
 from collections.abc import Callable
-from .permission import BasePermission
+from strawberry.permission import BasePermission
 
 _T = TypeVar("_T")
 

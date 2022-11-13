@@ -1,4 +1,4 @@
-from .development.base_component import Component
+from dash.development.base_component import Component
 
 _Child = str | list[Component]
 

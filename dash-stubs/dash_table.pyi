@@ -1,4 +1,4 @@
-from .development.base_component import Component
+from dash.development.base_component import Component
 from typing import Any, TypeVar, TypedDict, Generic
 
 _T = TypeVar("_T")

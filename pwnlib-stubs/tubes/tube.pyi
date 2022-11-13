@@ -1,5 +1,7 @@
 from contextlib import AbstractContextManager
 from collections.abc import Callable
+from typing import Type
+from types import TracebackType
 
 class tube(AbstractContextManager[tube]):
     def interactive(self, prompt: str = ...) -> None: ...
@@ -198,3 +200,12 @@ class tube(AbstractContextManager[tube]):
     wrtielineafter = sendlineafter
     writelinethen = sendlinethen
     writethen = sendthen
+
+    def __exit__(
+        self,
+        __exc_type: Type[BaseException] | None,
+        __exc_value: BaseException | None,
+        __traceback: TracebackType | None,
+        /,
+    ) -> None: ...
+    def close(self) -> None: ...

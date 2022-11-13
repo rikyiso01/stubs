@@ -1,7 +1,6 @@
-from .tube import tube
+from pwnlib.tubes.tube import tube
 from typing import Any
 from collections.abc import Callable
-from .tube import tube
 
 class process(tube):
     def __init__(

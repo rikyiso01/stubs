@@ -1,5 +1,5 @@
 from typing import Any, Generic, TypeVar, TypedDict
-from .development.base_component import Component
+from dash.development.base_component import Component
 from plotly.graph_objects import Figure
 from collections.abc import Iterable
 

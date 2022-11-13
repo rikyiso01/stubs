@@ -1,7 +1,7 @@
 from typing import Any
 from faker.providers import BaseProvider
 from collections.abc import Callable
-from .proxy import UniqueProxy
+from faker.proxy import UniqueProxy
 
 class Faker:
     unique: UniqueProxy

@@ -1,5 +1,5 @@
-from ..engine.base import Engine
-from .. import Table
+from sqlalchemy.engine.base import Engine
+from sqlalchemy import Table
 
 class MetaData:
     def create_all(self, bind: Engine) -> None: ...

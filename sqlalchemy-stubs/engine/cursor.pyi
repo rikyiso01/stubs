@@ -1,6 +1,6 @@
 from collections.abc import Iterator
-from .row import Row
-from .result import ScalarResult
+from sqlalchemy.engine.row import Row
+from sqlalchemy.engine.result import ScalarResult
 from typing import Any
 
 class CursorResult:
