@@ -1,6 +1,5 @@
-from typing import Literal, overload
 from scipy.signal import windows as windows
-
+from typing import Literal, overload
 from numpy.typing import ArrayLike, NDArray
 
 def medfilt(

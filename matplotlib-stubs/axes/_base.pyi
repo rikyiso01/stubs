@@ -1,9 +1,7 @@
 from matplotlib.artist import Artist
 from numpy.typing import ArrayLike, DTypeLike
-from typing import Literal, TypeVar, overload, Any
+from typing import Literal, overload, Any
 from matplotlib.colors import Colormap
-
-_T = TypeVar("_T", bound=DTypeLike)
 
 class _AxesBase(Artist): ...
 
@@ -17,19 +15,19 @@ class Axes(_AxesBase):
     def set_axis_off(self) -> None: ...
     def hist(
         self,
-        x: ArrayLike[_T],
+        x: ArrayLike[DTypeLike],
         bins: int = ...,
         range: tuple[int, int] = ...,
         density: bool = ...,
-        weights: ArrayLike[_T] = ...,
+        weights: ArrayLike[DTypeLike] = ...,
         cumulative: bool | Literal[-1] = ...,
-        bottom: ArrayLike[_T] = ...,
+        bottom: ArrayLike[DTypeLike] = ...,
         histtype: Literal["bar", "barstacked", "step", "stepfilled"] = ...,
         align: Literal["left", "mid", "right"] = ...,
         orientation: Literal["vertical", "horizontal"] = ...,
         rwidth: float = ...,
         log: bool = ...,
-        color: ArrayLike[_T] = ...,  # incomplete
+        color: ArrayLike[DTypeLike] = ...,  # incomplete
         label: str = ...,
         stacked: bool = ...,
     ) -> None: ...
@@ -70,7 +68,7 @@ class Axes(_AxesBase):
     def set_yticks(self, ticks: ArrayLike[float]) -> None: ...
     def plot(
         self,
-        *args: ArrayLike[_T] | str,
+        *args: ArrayLike[DTypeLike] | str,
         scalex: bool = ...,
         scaley: bool = ...,
         data: Any = ...,  # incomplete

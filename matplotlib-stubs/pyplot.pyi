@@ -1,11 +1,9 @@
 from numpy.typing import ArrayLike, DTypeLike, NDArray
-from typing import Literal, Any, overload, TypeVar
+from typing import Literal, Any, overload
 from matplotlib.colors import Colormap
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 from matplotlib import cm as cm
-
-_T = TypeVar("_T", bound=DTypeLike)
 
 _axes: Axes
 _figure: Figure
@@ -26,7 +24,7 @@ tight_layout = _figure.tight_layout
 def show(*, block: bool = ...) -> None: ...
 @overload
 def stem(
-    heads: ArrayLike[_T],
+    heads: ArrayLike[DTypeLike],
     *,
     linefmt: str = ...,
     markerfmt: str = ...,
@@ -39,8 +37,8 @@ def stem(
 ) -> None: ...
 @overload
 def stem(
-    locks: ArrayLike[_T],
-    heads: ArrayLike[_T] = ...,
+    locks: ArrayLike[DTypeLike],
+    heads: ArrayLike[DTypeLike] = ...,
     *,
     linefmt: str = ...,
     markerfmt: str = ...,
@@ -52,18 +50,18 @@ def stem(
     data: Any = ...,  # incomplete
 ) -> None: ...
 def step(
-    x: ArrayLike[_T],
-    y: ArrayLike[_T] = ...,
+    x: ArrayLike[DTypeLike],
+    y: ArrayLike[DTypeLike] = ...,
     fmt: str = ...,
     *args: Any,
     data: Any = ...,  # incomplete
     where: Literal["pre", "post", "mid"] = ...,
 ) -> None: ...
 def bar(
-    x: ArrayLike[_T],
-    height: ArrayLike[_T],
-    width: ArrayLike[_T] = ...,
-    bottom: ArrayLike[_T] = ...,
+    x: ArrayLike[DTypeLike],
+    height: ArrayLike[DTypeLike],
+    width: ArrayLike[DTypeLike] = ...,
+    bottom: ArrayLike[DTypeLike] = ...,
     *,
     align: Literal["center", "edge"] = ...,
     data: Any = ...,  # incomplete
