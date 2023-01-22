@@ -5,6 +5,7 @@ from typing import TypeVar, overload
 from numpy.typing import ArrayLike, DTypeLike
 
 _T = TypeVar("_T")
+_F = TypeVar("_F", bound=float)
 
 def bar(
     data_frame: DataFrame[_T, Any, Any] = ...,
@@ -27,5 +28,5 @@ def line(
     title: str = ...,
 ) -> Figure: ...
 def imshow(
-    img: ArrayLike[int], *, animation_frame: int = ..., facet_col: int = ...
+    img: ArrayLike[_F], *, animation_frame: int = ..., facet_col: int = ...
 ) -> Figure: ...
