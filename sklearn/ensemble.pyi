@@ -1,0 +1,6 @@
+from sklearn.base import BaseEstimator
+
+class RandomForestRegressor(BaseEstimator):
+    def __init__(
+        self, n_estimators: int = ..., *, random_state: int | None = ...
+    ) -> None: ...

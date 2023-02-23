@@ -1,0 +1,6 @@
+from sklearn.base import BaseEstimator
+
+class DecisionTreeRegressor(BaseEstimator):
+    def __init__(
+        self, *, random_state: int = ..., max_leaf_nodes: int = ...
+    ) -> None: ...
