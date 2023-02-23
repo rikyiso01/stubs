@@ -16,6 +16,7 @@ packages = [
     {include = "httpx-stubs"},
     {include = "IPython-stubs"},
     {include = "jwt-stubs"},
+    {include = "kaggle-stubs"},
     {include = "matplotlib-stubs"},
     {include = "motor-stubs"},
     {include = "MySQLdb-stubs"},
@@ -30,6 +31,7 @@ packages = [
     {include="pymongo-stubs"},
     {include = "scipy-stubs"},
     {include="skimage-stubs"},
+    {include="sklearn-stubs"},
     {include = "sqlalchemy-stubs"},
     {include = "strawberry-stubs"},
 ]
