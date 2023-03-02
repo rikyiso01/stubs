@@ -4,6 +4,7 @@ from matplotlib.colors import Colormap
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 from matplotlib import cm as cm
+from matplotlib.axes._subplots import AxesSubplot
 
 _axes: Axes
 _figure: Figure
@@ -95,3 +96,4 @@ def subplots(*, ncols: int) -> tuple[Figure, tuple[Axes, Axes]]: ...
 def subplots(
     nrows: int, ncols: int
 ) -> tuple[Figure, tuple[tuple[Axes, Axes], tuple[Axes, Axes]]]: ...
+def gca() -> AxesSubplot: ...
