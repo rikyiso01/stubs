@@ -1,9 +1,9 @@
 from numpy.typing import ArrayLike
-from pandas import DataFrame
 from typing import TypeVar, Any, overload
+from mte.pandas import DataFrameLike
 
-T = TypeVar("T", bound=ArrayLike[Any] | DataFrame[Any, Any, Any])
-V = TypeVar("V", bound=ArrayLike[Any] | DataFrame[Any, Any, Any])
+T = TypeVar("T", bound=ArrayLike[Any] | DataFrameLike[Any, Any, Any])
+V = TypeVar("V", bound=ArrayLike[Any] | DataFrameLike[Any, Any, Any])
 
 @overload
 def train_test_split(

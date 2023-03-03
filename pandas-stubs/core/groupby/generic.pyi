@@ -1,9 +1,6 @@
-from typing import Generic, TypeVar
+from typing import Generic
 from pandas import DataFrame
+from mte.typevar import K, V, F
 
-_K = TypeVar("_K")
-_V = TypeVar("_V")
-_N = TypeVar("_N", bound=float)
-
-class DataFrameGroupBy(Generic[_K, _V]):
-    def sum(self: DataFrameGroupBy[_K, _N]) -> DataFrame[_K, int, _V]: ...
+class DataFrameGroupBy(Generic[K, V]):
+    def sum(self: DataFrameGroupBy[K, F]) -> DataFrame[K, int, V]: ...

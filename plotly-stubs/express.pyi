@@ -1,17 +1,15 @@
 from typing import Any, Literal
 from plotly.graph_objects import Figure
-from pandas import DataFrame
-from typing import TypeVar, overload
+from typing import overload
 from numpy.typing import ArrayLike, DTypeLike
-
-_T = TypeVar("_T")
-_F = TypeVar("_F", bound=float)
+from mte.typevar import T, F
+from mte.pandas import DataFrameLike
 
 def bar(
-    data_frame: DataFrame[_T, Any, Any] = ...,
-    x: _T = ...,
-    y: _T = ...,
-    color: _T = ...,
+    data_frame: DataFrameLike[T, Any, Any] = ...,
+    x: T = ...,
+    y: T = ...,
+    color: T = ...,
     *,
     barmode: Literal["relative", "group"] = ...
 ) -> Figure: ...
@@ -21,12 +19,12 @@ def line(
 ) -> Figure: ...
 @overload
 def line(
-    data_frame: DataFrame[_T, Any, Any],
-    x: _T = ...,
-    y: _T = ...,
-    color: _T = ...,
+    data_frame: DataFrameLike[T, Any, Any],
+    x: T = ...,
+    y: T = ...,
+    color: T = ...,
     title: str = ...,
 ) -> Figure: ...
 def imshow(
-    img: ArrayLike[_F], *, animation_frame: int = ..., facet_col: int = ...
+    img: ArrayLike[F], *, animation_frame: int = ..., facet_col: int = ...
 ) -> Figure: ...

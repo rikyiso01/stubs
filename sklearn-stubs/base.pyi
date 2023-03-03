@@ -1,14 +1,13 @@
 from numpy.typing import ArrayLike, NDArray
-from pandas import DataFrame
-from typing import TypeVar, Any
+from typing import Any
 from typing_extensions import Self
-
-_N = TypeVar("_N", bound=float)
+from mte.typevar import F
+from mte.pandas import DataFrameLike
 
 class BaseEstimator:
     def fit(
-        self, X: ArrayLike[float] | DataFrame[Any, Any, _N], y: ArrayLike[float]
+        self, X: ArrayLike[float] | DataFrameLike[Any, Any, F], y: ArrayLike[float]
     ) -> Self: ...
     def predict(
-        self, X: ArrayLike[float] | DataFrame[Any, Any, _N]
+        self, X: ArrayLike[float] | DataFrameLike[Any, Any, F]
     ) -> NDArray[float]: ...

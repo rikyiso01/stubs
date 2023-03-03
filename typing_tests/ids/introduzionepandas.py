@@ -29,7 +29,8 @@ print(dfs.iloc[:, 2:10])
 print(df.iloc[:3, :4])
 k = df["Country/Region"] > "B"
 print(df.loc[k, :"Long"])
-print(df.loc[((df["Country/Region"] > "B") & (df["Lat"] > 20)), :"Long"])
+j=((df["Country/Region"] > "B") & (df["Lat"] > 20))
+print(df.loc[j, :"Long"])
 
 
 copydf = df.copy()

@@ -1,6 +1,5 @@
 from numpy.typing import NDArray
-from typing import TypeVar
+from mte.typevar import T
+from mte.numpy import BaseNDArray
 
-_T = TypeVar("_T")
-
-def convolve1d(input: NDArray[_T], weights: NDArray[_T]) -> NDArray[_T]: ...
+def convolve1d(input: BaseNDArray[T], weights: BaseNDArray[T]) -> NDArray[T]: ...

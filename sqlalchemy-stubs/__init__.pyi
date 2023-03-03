@@ -1,9 +1,8 @@
 from datetime import date, datetime, time, timedelta
-from typing import Callable, Optional, TypeVar, Any, Literal, overload
+from typing import Callable, Optional, Any, Literal, overload
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.sql.selectable import Select
-
-_T = TypeVar("_T")
+from mte.typevar import T
 
 def create_engine(
     url: str,
@@ -29,42 +28,42 @@ class ForeignKey:
     @overload
     def __new__(cls, target: str, *, deferrable: bool = ...) -> Any: ...
     @overload
-    def __new__(cls, target: _T, *, deferrable: bool = ...) -> _T: ...
+    def __new__(cls, target: T, *, deferrable: bool = ...) -> T: ...
     column: Column
 
 class Column:
     @overload
     def __new__(
         cls,
-        type: _T,
+        type: T,
         /,
         *,
         primary_key: Literal[False] = ...,
         nullable: Literal[True] = ...,
         unique: bool = ...,
-        default: Optional[_T] = ...,
-    ) -> Optional[_T]: ...
+        default: Optional[T] = ...,
+    ) -> Optional[T]: ...
     @overload
     def __new__(
         cls,
-        type: _T,
+        type: T,
         /,
         *,
         primary_key: Literal[True],
         unique: bool = ...,
-        default: _T = ...,
-    ) -> _T: ...
+        default: T = ...,
+    ) -> T: ...
     @overload
     def __new__(
         cls,
-        type: _T,
+        type: T,
         /,
         *,
         nullable: Literal[False],
         primary_key: bool = ...,
         unique: bool = ...,
-        default: _T = ...,
-    ) -> _T: ...
+        default: T = ...,
+    ) -> T: ...
 
     primary_key: bool
     nullable: bool

@@ -1,17 +1,16 @@
 from dash.development.base_component import Component
-from typing import Any, TypeVar, TypedDict, Generic
+from typing import Any, TypedDict, Generic
+from mte.typevar import T
 
-_T = TypeVar("_T")
-
-class _Column(TypedDict, Generic[_T]):
+class _Column(TypedDict, Generic[T]):
     name: Any
-    id: _T
+    id: T
 
 class DataTable(Component):
     def __init__(
         self,
-        data: list[dict[_T, Any]] = ...,
-        columns: list[_Column[_T]] = ...,
+        data: list[dict[T, Any]] = ...,
+        columns: list[_Column[T]] = ...,
         *,
         id: str = ...
     ) -> None: ...

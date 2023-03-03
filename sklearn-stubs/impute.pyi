@@ -1,11 +1,10 @@
-from typing import TypeVar, Any
+from typing import Any
 from numpy.typing import NDArray, ArrayLike
-from pandas import DataFrame
-
-_N = TypeVar("_N", bound=float)
+from mte.typevar import F
+from mte.pandas import DataFrameLike
 
 class SimpleImputer:
     def fit_transform(
-        self, X: ArrayLike[_N] | DataFrame[Any, Any, _N]
-    ) -> NDArray[_N]: ...
-    def transform(self, X: ArrayLike[_N] | DataFrame[Any, Any, _N]) -> NDArray[_N]: ...
+        self, X: ArrayLike[F] | DataFrameLike[Any, Any, F]
+    ) -> NDArray[F]: ...
+    def transform(self, X: ArrayLike[F] | DataFrameLike[Any, Any, F]) -> NDArray[F]: ...

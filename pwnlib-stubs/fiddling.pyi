@@ -2,7 +2,6 @@ from typing import Literal, TypeVar
 from collections.abc import Iterable
 
 _T = TypeVar("_T", str, int, list[str], tuple[str, ...])
-_V = TypeVar("_V")
 
 def b64d(s: str) -> bytes: ...
 def b64e(s: bytes) -> str: ...

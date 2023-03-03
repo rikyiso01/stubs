@@ -1,85 +1,80 @@
-from typing import Generic, TypeVar, overload, Any
-from collections.abc import Sequence
+from typing import Generic, overload, Any
 from pandas import Series, DataFrame
+from mte.typevar import K, K2, V
+from mte.pandas import SeriesCompatible, DataFrameLike, SeriesLike
 
-_K = TypeVar("_K")
-_K2 = TypeVar("_K2")
-_V = TypeVar("_V")
-
-class LockIndexerDataFrame(Generic[_K, _K2, _V]):
+class LockIndexerDataFrame(Generic[K, K2, V]):
     @overload
     def __getitem__(
         self,
-        item: _K2 | tuple[slice, _K] | tuple[_K2, slice],
+        item: K2 | tuple[slice, K] | tuple[K2, slice],
         /,
-    ) -> Series[_K, _V]: ...
+    ) -> Series[K, V]: ...
     @overload
-    def __getitem__(self, item: tuple[_K2, _K], /) -> _V: ...
+    def __getitem__(self, item: tuple[K2, K], /) -> V: ...
     @overload
     def __getitem__(
         self,
         item: slice
         | tuple[
-            slice | Sequence[bool] | Series[_K2, bool] | Series[Any, _K] | Sequence[_K],
-            slice | Sequence[bool] | Series[_K2, bool] | Series[Any, _K] | Sequence[_K],
+            slice | SeriesCompatible[K2, bool] | SeriesCompatible[Any, K],
+            slice | SeriesCompatible[K2, bool] | SeriesCompatible[Any, K],
         ]
-        | Sequence[bool]
-        | Series[_K2, bool]
-        | Series[Any, _K]
-        | Sequence[_K],
+        | SeriesCompatible[K2, bool]
+        | SeriesCompatible[Any, K],
         /,
-    ) -> DataFrame[_K, _K2, _V]: ...
+    ) -> DataFrame[K, K2, V]: ...
     @overload
     def __setitem__(
         self,
-        item: _K2
+        item: K2
         | tuple[
-            slice | Sequence[bool] | Series[_K2, bool] | Series[Any, _K] | Sequence[_K],
-            _K,
+            slice | SeriesCompatible[K2, bool] | SeriesCompatible[Any, K],
+            K,
         ]
         | tuple[
-            _K2,
-            slice | Sequence[bool] | Series[_K2, bool] | Series[Any, _K] | Sequence[_K],
+            K2,
+            slice | SeriesCompatible[K2, bool] | SeriesCompatible[Any, K],
         ],
-        value: Series[_K, _V],
+        value: SeriesLike[K, V],
         /,
     ) -> None: ...
     @overload
-    def __setitem__(self, item: tuple[_K2, _K], value: _V, /) -> _V: ...
+    def __setitem__(self, item: tuple[K2, K], value: V, /) -> V: ...
     @overload
     def __setitem__(
-        self, item: slice | tuple[slice, slice], value: DataFrame[_K, _K2, _V], /
-    ) -> DataFrame[_K, _K2, _V]: ...
+        self, item: slice | tuple[slice, slice], value: DataFrameLike[K, K2, V], /
+    ) -> DataFrame[K, K2, V]: ...
 
-class iLockIndexerDataFrame(Generic[_K, _K2, _V]):
+class iLockIndexerDataFrame(Generic[K, K2, V]):
     @overload
     def __getitem__(
         self,
         item: int | tuple[slice, int] | tuple[int, slice],
         /,
-    ) -> Series[_K, _V]: ...
+    ) -> Series[K, V]: ...
     @overload
-    def __getitem__(self, item: tuple[int, int], /) -> _V: ...
+    def __getitem__(self, item: tuple[int, int], /) -> V: ...
     @overload
     def __getitem__(
         self, item: slice | tuple[slice, slice], /
-    ) -> DataFrame[_K, _K2, _V]: ...
+    ) -> DataFrame[K, K2, V]: ...
     @overload
     def __setitem__(
         self,
         item: int | tuple[slice, int] | tuple[int, slice],
-        value: Series[_K, _V],
+        value: SeriesLike[K, V],
         /,
     ) -> None: ...
     @overload
-    def __setitem__(self, item: tuple[int, int], value: _V, /) -> None: ...
+    def __setitem__(self, item: tuple[int, int], value: V, /) -> None: ...
     @overload
     def __setitem__(
-        self, item: slice | tuple[slice, slice], value: DataFrame[_K, _K2, _V], /
+        self, item: slice | tuple[slice, slice], value: DataFrameLike[K, K2, V], /
     ) -> None: ...
 
-class iLockIndexerSeries(Generic[_K, _V]):
-    def __getitem__(self, item: int, /) -> _V: ...
+class iLockIndexerSeries(Generic[K, V]):
+    def __getitem__(self, item: int, /) -> V: ...
 
-class LockIndexerSeries(Generic[_K, _V]):
-    def __getitem__(self, item: _K, /) -> _V: ...
+class LockIndexerSeries(Generic[K, V]):
+    def __getitem__(self, item: K, /) -> V: ...
