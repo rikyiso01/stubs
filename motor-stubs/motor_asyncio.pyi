@@ -1,4 +1,4 @@
-from collections.abc import Mapping, AsyncIterable, Iterable
+from collections.abc import AsyncIterable, Iterable,Mapping
 from typing import Any
 from pymongo.results import InsertManyResult, InsertOneResult
 

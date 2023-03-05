@@ -1,7 +1,6 @@
-from contextlib import AbstractAsyncContextManager
 from types import TracebackType
-
-_JsonType = dict[str, _JsonType] | list[_JsonType] | int | str | float | None | bool
+from mte.protocols import AsyncContextManager
+from mte.json import JsonType,PythonJsonType
 
 class HTTPError(Exception): ...
 class RequestError(HTTPError): ...
@@ -14,17 +13,17 @@ class Response:
     def text(self) -> str: ...
     @property
     def content(self) -> bytes: ...
-    def json(self) -> _JsonType: ...
+    def json(self) -> JsonType: ...
     @property
     def status_code(self) -> int: ...
 
-class AsyncClient(AbstractAsyncContextManager[AsyncClient]):
+class AsyncClient(AsyncContextManager[AsyncClient]):
     async def get(
         self,
         url: str,
         *,
         data: dict[str, str] = ...,
-        json: _JsonType = ...,
+        json: PythonJsonType = ...,
         auth: tuple[str, str] | None = ...,
         params: dict[str, str] = ...
     ) -> Response: ...
@@ -33,11 +32,12 @@ class AsyncClient(AbstractAsyncContextManager[AsyncClient]):
         url: str,
         *,
         data: dict[str, str] = ...,
-        json: _JsonType = ...,
+        json: PythonJsonType = ...,
         auth: tuple[str, str] | None = ...,
         params: dict[str, str] = ...
     ) -> Response: ...
-    def __aexit__(
+    async def __aenter__(self) -> AsyncClient: ...
+    async def __aexit__(
         self,
         __exc_type: type[BaseException] | None,
         __exc_value: BaseException | None,
@@ -48,13 +48,13 @@ def get(
     url: str,
     *,
     data: dict[str, str] = ...,
-    json: _JsonType = ...,
+    json: PythonJsonType = ...,
     auth: tuple[str, str] | None = ...
 ) -> Response: ...
 def post(
     url: str,
     *,
     data: dict[str, str] = ...,
-    json: _JsonType = ...,
+    json: PythonJsonType = ...,
     auth: tuple[str, str] | None = ...
 ) -> Response: ...

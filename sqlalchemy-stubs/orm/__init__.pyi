@@ -2,17 +2,17 @@ from sqlalchemy.engine.result import ScalarResult
 from sqlalchemy.engine.cursor import CursorResult
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.orm.decl_api import Base
-from contextlib import AbstractContextManager
 from typing import Type, Any
 from sqlalchemy.sql.elements import TextClause
 from sqlalchemy.sql.selectable import Select
 from sqlalchemy.orm.query import Query
 from sqlalchemy import Table
 from types import TracebackType
+from mte.protocols import ContextManager
 
 _Stmt = TextClause | Select
 
-class Session(AbstractContextManager[Session]):
+class Session(ContextManager[Session]):
     def __init__(self, engine: Engine) -> None: ...
     def commit(self) -> None: ...
     def add_all(self, instances: list[Base]) -> None: ...
@@ -22,6 +22,7 @@ class Session(AbstractContextManager[Session]):
     def scalars(self, statement: _Stmt) -> ScalarResult: ...
     def query(self, table: Table) -> Query: ...
     def flush(self) -> None: ...
+    def __enter__(self) -> Session: ...
     def __exit__(
         self,
         __exc_type: Type[BaseException] | None,

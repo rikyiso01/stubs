@@ -1,5 +1,5 @@
 from typing import Any, Literal, Generic, Type, overload
-from collections.abc import Iterable, Iterator, Sequence, Callable
+from collections.abc import Iterable, Iterator, Callable,Sequence
 from numpy.typing import NDArray
 from pandas.core.indexes.base import Index
 from pandas.core.groupby.generic import DataFrameGroupBy

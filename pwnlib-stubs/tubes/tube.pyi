@@ -1,9 +1,9 @@
-from contextlib import AbstractContextManager
 from collections.abc import Callable
 from typing import Type
 from types import TracebackType
+from mte.protocols import ContextManager
 
-class tube(AbstractContextManager[tube]):
+class tube(ContextManager[tube]):
     def interactive(self, prompt: str = ...) -> None: ...
     def recv(self, numb: int = ..., timeout: int = ...) -> bytes: ...
     def recvS(self, numb: int = ..., timeout: int = ...) -> str: ...
@@ -200,6 +200,8 @@ class tube(AbstractContextManager[tube]):
     wrtielineafter = sendlineafter
     writelinethen = sendlinethen
     writethen = sendthen
+
+    def __enter__(self)->tube:...
 
     def __exit__(
         self,

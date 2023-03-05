@@ -1,9 +1,9 @@
-from contextlib import AbstractAsyncContextManager
 from asyncio import AbstractEventLoop, Future, Semaphore
-from collections.abc import Awaitable, Callable, Iterable, Coroutine
+from collections.abc import Awaitable, Callable, Iterable
 from types import TracebackType
 from typing import Any, overload, Type
-from mte.typevar import T,V,K,T2
+from mte.typevar import T, V, K, T2
+from mte.protocols import AsyncContextManager
 
 _Callback = (
     Callable[[T], Any]
@@ -11,7 +11,7 @@ _Callback = (
     | Callable[[T, tuple[Exception, TracebackType], V], Any]
 )
 
-class AioPool(AbstractAsyncContextManager[AioPool]):
+class AioPool(AsyncContextManager[AioPool]):
     def __init__(self, size: int = ..., *, loop: AbstractEventLoop = ...) -> None: ...
 
     loop: AbstractEventLoop
@@ -58,10 +58,11 @@ class AioPool(AbstractAsyncContextManager[AioPool]):
     ) -> tuple[list[Future[Any]], list[Any]]: ...
     def __len__(self) -> int: ...
     async def join(self) -> bool: ...
-    def __aexit__(
+    async def __aenter__(self) -> AioPool: ...
+    async def __aexit__(
         self,
         __exc_type: Type[BaseException] | None,
         __exc_value: BaseException | None,
         __traceback: TracebackType | None,
         /,
-    ) -> Coroutine[Any, Any, bool | None]: ...
+    ) -> bool | None: ...
