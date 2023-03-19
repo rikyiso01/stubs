@@ -3506,6 +3506,18 @@ docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=2.0)", "pre-commit", "pytest", "pytest-mock"]
 
 [[package]]
+name = "types-sqlalchemy"
+version = "1.4.53.34"
+description = "Typing stubs for SQLAlchemy"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-SQLAlchemy-1.4.53.34.tar.gz", hash = "sha256:b446a085075fb2736a04db91f2cb3845298a8412cd572b490b52f64435e3d18f"},
+    {file = "types_SQLAlchemy-1.4.53.34-py3-none-any.whl", hash = "sha256:b806437a27164842fffcae3a1c28d81f7574537df5e001774fe15a49a3e9fe4a"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.5.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -3753,4 +3765,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "fa89b8d83128e0f88988653c2663812b6c4e814a20f0e7ff600e4a257bbb2c34"
+content-hash = "645937aebbc854186c9f254bc9289c76c9a1a4ba3db4819557251373c80868e3"

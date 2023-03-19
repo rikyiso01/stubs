@@ -20,7 +20,7 @@ EVENT_SITE = "https://ctftime.org/event/{}"
 def get_logo_url() -> str:
     api = get(JSON_API).json()
     assert isinstance(api, dict)
-    result = api["logo"]
+    result: str = api["logo"]
     assert isinstance(result, str)
     return result
 

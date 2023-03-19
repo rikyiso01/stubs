@@ -1,5 +1,5 @@
 from typing import Generic, Any, Type, TypeVar
-from collections.abc import Iterator, Sequence
+from collections.abc import Iterator
 from numpy import (
     min as _min,
     max as _max,
@@ -31,14 +31,13 @@ from numpy import (
     invert,
     power,
     repeat as _repeat,
+    reshape as _reshape,
 )
 from mte.protocols import SupportsReal, SupportsImag
 from mte.typevar import T, T2
-from mte.numpy import Array, BaseNDArray
+from mte.numpy import Array, BaseNDArray, ArrayLike as ArrayLike
 
 DTypeLike = TypeVar("DTypeLike", bound=complex | str)
-
-ArrayLike = Sequence[ArrayLike[T]] | Array[T] | T
 
 class NDArray(Generic[T], BaseNDArray[T]):
     def __array__(self) -> NDArray[T]: ...
@@ -111,3 +110,5 @@ class NDArray(Generic[T], BaseNDArray[T]):
     @property
     def T(self) -> NDArray[T]: ...
     repeat = _repeat
+    def tolist(self) -> list[T]: ...
+    reshape = _reshape

@@ -3,7 +3,9 @@ from collections.abc import Iterator
 from mte.typevar import T
 
 class BeautifulSoup(Tag):
-    def __init__(self, markup: AnyStr, *, features: Literal["html.parser"]) -> None: ...
+    def __init__(
+        self, markup: AnyStr, *, features: Literal["html.parser", "xml"]
+    ) -> None: ...
 
 class Tag:
     def __call__(

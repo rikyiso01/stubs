@@ -36,7 +36,7 @@ class LockIndexerDataFrame(Generic[K, K2, V]):
             K2,
             slice | SeriesCompatible[K2, bool] | SeriesCompatible[Any, K],
         ],
-        value: SeriesLike[K, V],
+        value: SeriesCompatible[K, V],
         /,
     ) -> None: ...
     @overload
@@ -78,3 +78,6 @@ class iLockIndexerSeries(Generic[K, V]):
 
 class LockIndexerSeries(Generic[K, V]):
     def __getitem__(self, item: K, /) -> V: ...
+    def __setitem__(
+        self, item: K | SeriesCompatible[K, bool], value: SeriesCompatible[K, V] | V, /
+    ) -> None: ...

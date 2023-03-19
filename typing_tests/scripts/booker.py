@@ -1,4 +1,4 @@
-from requests import Session
+from httpx import Client
 from bs4 import BeautifulSoup
 from re import compile
 from json import loads
@@ -29,7 +29,7 @@ BOOKING_URL = f"https://easyacademy.unige.it/portalestudenti/call_ajax.php?mode=
 
 
 def main():
-    session = Session()
+    session = Client()
     session.get(URL)
     soup = BeautifulSoup(session.get(LOGIN_URL).text, features="html.parser")
     auth_state = soup("input", {"name": "AuthState"})[0]["value"]
