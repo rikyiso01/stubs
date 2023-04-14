@@ -20,6 +20,7 @@ X_train, X_valid, y_train, y_valid = train_test_split(
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 
+
 # Function for comparing different approaches
 def score_dataset(
     X_train: pd.DataFrame[str, int, float],

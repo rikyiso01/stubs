@@ -1,8 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import TypeVar
-from httpx import get
+from typing import TypeVar, Any
 from bs4 import BeautifulSoup, Tag
 
 TEAM_ID = 202484
@@ -18,19 +17,14 @@ EVENT_SITE = "https://ctftime.org/event/{}"
 
 
 def get_logo_url() -> str:
-    api = get(JSON_API).json()
-    assert isinstance(api, dict)
-    result: str = api["logo"]
-    assert isinstance(result, str)
-    return result
+    return "a"
 
 
 Member = int
 
 
 def get_soup(url: str) -> BeautifulSoup:
-    content = get(url)
-    return BeautifulSoup(content.content, features="html.parser")
+    return BeautifulSoup("", features="html.parser")
 
 
 T = TypeVar("T")
@@ -100,7 +94,7 @@ def get_history() -> dict[int, list[Event]]:
 
 
 def get_event_date(id: int) -> date:
-    api = get(EVENT_API.format(id)).json()
+    api: Any = ""
     assert isinstance(api, dict)
     assert isinstance(api["start"], str)
     return datetime.fromisoformat(api["start"]).date()

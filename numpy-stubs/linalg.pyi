@@ -1,0 +1,3 @@
+from numpy.typing import ArrayLike
+
+def norm(x: ArrayLike[complex], ord: int | None = ...) -> float: ...

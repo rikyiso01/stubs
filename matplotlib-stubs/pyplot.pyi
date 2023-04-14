@@ -22,6 +22,14 @@ title = _axes.set_title
 subplot = _figure.add_subplot
 tight_layout = _figure.tight_layout
 
+def scatter(
+    x: ArrayLike[float],
+    y: ArrayLike[float],
+    *,
+    alpha: float | None = ...,
+    label: str | None = ...,
+    c: str | None = ...,
+) -> None: ...
 def show(*, block: bool = ...) -> None: ...
 @overload
 def stem(

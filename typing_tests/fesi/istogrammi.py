@@ -117,7 +117,7 @@ plt.hist((my_img_rescale).ravel(), bins=1000)
 
 # Contrast stretching
 p2, p98 = np.percentile(img, (2, 98))
-img_rescale = exposure.rescale_intensity(img, in_range=(p2, p98))
+img_rescale = exposure.rescale_intensity(img, in_range=(float(p2), float(p98)))
 my_img_rescale = my_contrast_stretch(img)
 
 # Display results

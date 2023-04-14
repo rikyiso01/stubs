@@ -16,6 +16,7 @@ from mte.typevar import K, V, K2, I, V2, I2, K3, C, C2, T
 from mte.pandas import SeriesLike, SeriesCompatible, DataFrameLike
 from datetime import datetime
 from pandas.core.arrays.categorical import Categorical
+from pandas.io.formats.style import Styler
 
 def read_csv(
     filepath_or_buffer: str, *, error_bad_lines: bool = ...
@@ -161,12 +162,12 @@ class Series(Generic[K, V]):
 class DataFrame(Generic[K, K2, V]):
     @overload
     def __new__(
-        cls, data: Iterable[V], *, dtype: Type[V] = ..., copy: bool = ...
+        cls, data: ArrayLike[V], *, dtype: Type[V] = ..., copy: bool = ...
     ) -> DataFrame[int, int, V]: ...
     @overload
     def __new__(
         cls,
-        data: Iterable[V],
+        data: ArrayLike[V],
         index: Iterable[K2],
         *,
         dtype: Type[V] = ...,
@@ -175,7 +176,7 @@ class DataFrame(Generic[K, K2, V]):
     @overload
     def __new__(
         cls,
-        data: Iterable[V],
+        data: ArrayLike[V],
         *,
         columns: Iterable[K],
         dtype: Type[V] = ...,
@@ -333,6 +334,8 @@ class DataFrame(Generic[K, K2, V]):
     def T(self) -> DataFrame[K2, K, V]: ...
     @property
     def plot(self) -> PlotAccessor[K]: ...
+    @property
+    def style(self) -> Styler: ...
     def __or__(
         self: DataFrameLike[K, K2, I], other: DataFrameLike[K, K2, I2]
     ) -> DataFrame[K, K2, I | I2]: ...
@@ -354,6 +357,7 @@ class DataFrame(Generic[K, K2, V]):
     @property
     def values(self) -> NDArray[V]: ...
     def sort_index(self) -> DataFrame[K, K2, V]: ...
+    def corr(self) -> DataFrame[K, K2, float]: ...
 
 @overload
 def concat(objs: Iterable[DataFrameLike[K, K2, V]]) -> DataFrame[K, K2, V]: ...

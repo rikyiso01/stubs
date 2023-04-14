@@ -1,0 +1,13 @@
+from numpy.typing import ArrayLike
+from typing import Literal
+from ._stats_py import TtestResult, Power_divergenceResult
+
+def ttest_1samp(
+    a: ArrayLike[float],
+    popmean: float,
+    *,
+    alternative: Literal["two-sided", "less", "greater"] = ...
+) -> TtestResult: ...
+def chisquare(
+    f_obs: ArrayLike[float], f_exp: ArrayLike[float] = ...
+) -> Power_divergenceResult: ...

@@ -16,6 +16,7 @@ from mte.typevar import TT, T, T2, T_co, C, C2, F, F2, I, I2
 int_ = int
 bool_ = bool
 float_ = float
+float32 = float
 str_ = str
 ndarray = NDArray
 matrix = NDArray
