@@ -61,6 +61,7 @@ print(score_dataset(imputed_X_train, imputed_X_valid, y_train, y_valid))
 X_train_plus = X_train.copy()
 X_valid_plus = X_valid.copy()
 
+
 # Make new columns indicating what will be imputed
 for col in cols_with_missing:
     X_train_plus[col + "_was_missing"] = X_train_plus[col].isnull()

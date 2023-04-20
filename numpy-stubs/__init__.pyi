@@ -23,6 +23,8 @@ matrix = NDArray
 uint8 = int
 object = Any
 
+nan: float
+
 class _SupportsPositive(Protocol[T_co]):
     def __pos__(self) -> T_co: ...
 
