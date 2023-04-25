@@ -3,13 +3,13 @@ from pandas import Series, DataFrame
 from mte.typevar import K, K2, V
 from mte.pandas import SeriesCompatible, DataFrameLike, SeriesLike
 from collections.abc import Iterator
-from numpy.typing import NDArray
+from numpy.typing import NDArray, ArrayLike
 
 class LockIndexerDataFrame(Generic[K, K2, V]):
     @overload
     def __getitem__(
         self,
-        item: K2 | tuple[slice, K] | tuple[K2, slice],
+        item: K2 | tuple[slice | ArrayLike[bool], K] | tuple[K2, slice],
         /,
     ) -> Series[K, V]: ...
     @overload
