@@ -32,6 +32,7 @@ from numpy import (
     power,
     repeat as _repeat,
     reshape as _reshape,
+    dot as _dot,
 )
 from mte.protocols import SupportsReal, SupportsImag
 from mte.typevar import T, T2
@@ -112,3 +113,4 @@ class NDArray(Generic[T], BaseNDArray[T]):
     repeat = _repeat
     def tolist(self) -> list[T]: ...
     reshape = _reshape
+    dot = _dot
