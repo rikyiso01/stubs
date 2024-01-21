@@ -1,8 +1,6 @@
 from pandas import Series
-from typing import Generic
-from mte.typevar import K
 
-class CombinedDatetimelikeProperties(Generic[K]):
+class CombinedDatetimelikeProperties[K]:
     @property
     def day(self) -> Series[K, int]: ...
     @property

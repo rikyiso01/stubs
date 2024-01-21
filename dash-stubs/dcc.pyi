@@ -1,13 +1,11 @@
-from typing import Any, Generic, TypedDict, TypeVar
+from typing import Any, TypedDict
 from dash.development.base_component import Component
 from plotly.graph_objects import Figure
 from collections.abc import Iterable
 
-_SC = TypeVar("_SC", bound=complex | str)
-
-class _Option(TypedDict, Generic[_SC]):
+class _Option[SC: complex | str](TypedDict):
     label: Any
-    value: _SC
+    value: SC
 
 class Graph(Component):
     def __init__(self, id: str = ..., *, figure: Figure = ...) -> None: ...
@@ -19,6 +17,8 @@ class Markdown(Component):
     def __init__(self, children: str = ..., id: str = ...) -> None: ...
 
 class Dropdown(Component):
-    def __init__(
-        self, options: Iterable[_Option[_SC]] | Iterable[_SC], value: _SC, *, id: str
+    def __init__[
+        SC: complex | str
+    ](
+        self, options: Iterable[_Option[SC]] | Iterable[SC], value: SC, *, id: str
     ) -> None: ...

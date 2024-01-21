@@ -1,11 +1,10 @@
-from typing import Generic, overload, Any
+from typing import overload, Any
 from pandas import Series, DataFrame
-from mte.typevar import K, K2, V
 from mte.pandas import SeriesCompatible, DataFrameLike, SeriesLike
 from collections.abc import Iterator
 from numpy.typing import NDArray, ArrayLike
 
-class LockIndexerDataFrame(Generic[K, K2, V]):
+class LockIndexerDataFrame[K, K2, V]:
     @overload
     def __getitem__(
         self,
@@ -48,7 +47,7 @@ class LockIndexerDataFrame(Generic[K, K2, V]):
         self, item: slice | tuple[slice, slice], value: DataFrameLike[K, K2, V], /
     ) -> DataFrame[K, K2, V]: ...
 
-class iLockIndexerDataFrame(Generic[K, K2, V]):
+class iLockIndexerDataFrame[K, K2, V]:
     @overload
     def __getitem__(
         self,
@@ -76,10 +75,10 @@ class iLockIndexerDataFrame(Generic[K, K2, V]):
     ) -> None: ...
     def __iter__(self) -> Iterator[NDArray[V]]: ...
 
-class iLockIndexerSeries(Generic[K, V]):
+class iLockIndexerSeries[K, V]:
     def __getitem__(self, item: int, /) -> V: ...
 
-class LockIndexerSeries(Generic[K, V]):
+class LockIndexerSeries[K, V]:
     def __getitem__(self, item: K, /) -> V: ...
     def __setitem__(
         self, item: K | SeriesCompatible[K, bool], value: SeriesCompatible[K, V] | V, /

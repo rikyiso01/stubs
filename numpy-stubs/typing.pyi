@@ -1,4 +1,4 @@
-from typing import Generic, Any, Type, TypeVar
+from typing import Any, Type, TypeVar
 from collections.abc import Iterator
 from numpy import (
     min as _min,
@@ -35,12 +35,11 @@ from numpy import (
     dot as _dot,
 )
 from mte.protocols import SupportsReal, SupportsImag
-from mte.typevar import T, T2
 from mte.numpy import Array, BaseNDArray, ArrayLike as ArrayLike
 
 DTypeLike = TypeVar("DTypeLike", bound=complex | str)
 
-class NDArray(Generic[T], BaseNDArray[T]):
+class NDArray[T](BaseNDArray[T]):
     def __array__(self) -> NDArray[T]: ...
     min = _min
     max = _max
@@ -102,7 +101,7 @@ class NDArray(Generic[T], BaseNDArray[T]):
     def shape(self) -> tuple[int, ...]: ...
     @property
     def size(self) -> int: ...
-    def astype(self, dtype: Type[T2]) -> NDArray[T2]: ...
+    def astype[T2](self, dtype: Type[T2]) -> NDArray[T2]: ...
     @property
     def real(self: Array[SupportsReal[T]]) -> NDArray[T]: ...
     @property

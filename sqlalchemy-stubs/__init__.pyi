@@ -2,7 +2,6 @@ from datetime import date, datetime, time, timedelta
 from typing import Callable, Optional, Any, Literal, overload
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.sql.selectable import Select
-from mte.typevar import T
 
 def create_engine(
     url: str,
@@ -28,12 +27,14 @@ class ForeignKey:
     @overload
     def __new__(cls, target: str, *, deferrable: bool = ...) -> Any: ...
     @overload
-    def __new__(cls, target: T, *, deferrable: bool = ...) -> T: ...
+    def __new__[T](cls, target: T, *, deferrable: bool = ...) -> T: ...
     column: Column
 
 class Column:
     @overload
-    def __new__(
+    def __new__[
+        T
+    ](
         cls,
         type: T,
         /,
@@ -44,7 +45,9 @@ class Column:
         default: Optional[T] = ...,
     ) -> Optional[T]: ...
     @overload
-    def __new__(
+    def __new__[
+        T
+    ](
         cls,
         type: T,
         /,
@@ -54,7 +57,9 @@ class Column:
         default: T = ...,
     ) -> T: ...
     @overload
-    def __new__(
+    def __new__[
+        T
+    ](
         cls,
         type: T,
         /,

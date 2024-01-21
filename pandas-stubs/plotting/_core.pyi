@@ -1,7 +1,4 @@
-from typing import Generic
-from mte.typevar import K
-
-class PlotAccessor(Generic[K]):
+class PlotAccessor[K]():
     def __call__(
         self, kind: str = ..., x: K = ..., figsize: tuple[int, int] = ...
     ) -> None:

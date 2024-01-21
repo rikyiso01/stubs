@@ -28,7 +28,7 @@ def scatter(
     *,
     alpha: float | None = ...,
     label: str | None = ...,
-    c: str | None = ...,
+    c: str | None | ArrayLike[float] = ...,
 ) -> None: ...
 def show(*, block: bool = ...) -> None: ...
 @overload

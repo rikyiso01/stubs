@@ -2,7 +2,6 @@ from __future__ import annotations
 from typing import runtime_checkable, Protocol, overload, AnyStr, Any
 from typing_extensions import Self
 from collections.abc import Iterable, Reversible, Sized, Set as AbstractSet, Iterator
-from mte.typevar import V_co, T, T_co, V, T2, T_con
 from mte.protocols import SupportsGetItem
 
 
@@ -13,19 +12,17 @@ class Container(Protocol):
 
 
 @runtime_checkable
-class Collection(Iterable[V_co], Sized, Container, Protocol[V_co]):
+class Collection[V](Iterable[V], Sized, Container, Protocol):
     ...
 
 
 @runtime_checkable
-class BaseSequence(
-    Reversible[V_co], Collection[V_co], SupportsGetItem[int, V_co], Protocol[V_co]
-):
+class BaseSequence[V](Reversible[V], Collection[V], SupportsGetItem[int, V], Protocol):
     ...
 
 
 @runtime_checkable
-class Sequence(BaseSequence[V_co], Protocol[V_co]):
+class Sequence[V](BaseSequence[V], Protocol):
     def index(self, elem: Any, start: int = ..., end: int = ..., /) -> int:
         ...
 
@@ -34,7 +31,7 @@ class Sequence(BaseSequence[V_co], Protocol[V_co]):
 
 
 @runtime_checkable
-class BaseMutableSequence(BaseSequence[T], Protocol[T]):
+class BaseMutableSequence[T](BaseSequence[T], Protocol):
     @overload
     def __setitem__(self, index: int, value: T, /) -> None:
         ...
@@ -53,7 +50,7 @@ class BaseMutableSequence(BaseSequence[T], Protocol[T]):
 
 
 @runtime_checkable
-class MutableSequence(BaseMutableSequence[T], Sequence[T], Protocol[T]):
+class MutableSequence[T](BaseMutableSequence[T], Sequence[T], Protocol):
     def insert(self, index: int, value: T, /) -> None:
         ...
 
@@ -82,7 +79,7 @@ class ByteString(Sequence[int], Protocol):
 
 
 @runtime_checkable
-class Set(Collection[V_co], Protocol[V_co]):
+class Set[V](Collection[V], Protocol):
     def __lt__(self, other: AbstractSet[object], /) -> bool:
         ...
 
@@ -95,16 +92,16 @@ class Set(Collection[V_co], Protocol[V_co]):
     def __le__(self, other: AbstractSet[object], /) -> bool:
         ...
 
-    def __and__(self, other: AbstractSet[object], /) -> Set[V_co]:
+    def __and__(self, other: AbstractSet[object], /) -> Set[V]:
         ...
 
-    def __or__(self, other: AbstractSet[T], /) -> AbstractSet[V_co | T]:
+    def __or__[T](self, other: AbstractSet[T], /) -> AbstractSet[V | T]:
         ...
 
-    def __sub__(self, other: AbstractSet[Any], /) -> Set[V_co]:
+    def __sub__(self, other: AbstractSet[Any], /) -> Set[V]:
         ...
 
-    def __xor__(self, other: AbstractSet[T], /) -> AbstractSet[V_co | T]:
+    def __xor__[T](self, other: AbstractSet[T], /) -> AbstractSet[V | T]:
         ...
 
     def isdisjoint(self, other: Iterable[object], /) -> bool:
@@ -112,7 +109,7 @@ class Set(Collection[V_co], Protocol[V_co]):
 
 
 @runtime_checkable
-class MutableSet(Set[T], Protocol[T]):
+class MutableSet[T](Set[T], Protocol):
     def add(self, value: T, /) -> None:
         ...
 
@@ -142,8 +139,8 @@ class MutableSet(Set[T], Protocol[T]):
 
 
 @runtime_checkable
-class BaseMapping(Collection[T], Protocol[T, V_co]):
-    def __getitem__(self, key: T, /) -> V_co:
+class BaseMapping[T, V](Collection[T], Protocol):
+    def __getitem__(self, key: T, /) -> V:
         ...
 
 
@@ -153,26 +150,26 @@ class MappingView(Sized, Protocol):
 
 
 @runtime_checkable
-class KeysView(Set[V_co], Protocol[V_co]):
+class KeysView[V](Set[V], Protocol):
     ...
 
 
 @runtime_checkable
-class ValuesView(Collection[V_co], Protocol[V_co]):
+class ValuesView[V](Collection[V], Protocol):
     ...
 
 
 @runtime_checkable
-class ItemsView(Set[tuple[T_co, V_co]], Protocol[T_co, V_co]):
+class ItemsView[T, V](Set[tuple[T, V]], Protocol):
     ...
 
 
 @runtime_checkable
-class Mapping(BaseMapping[T, V_co], Protocol[T, V_co]):
-    def items(self) -> ItemsView[T, V_co]:
+class Mapping[T, V](BaseMapping[T, V], Protocol):
+    def items(self) -> ItemsView[T, V]:
         ...
 
-    def values(self) -> ValuesView[V_co]:
+    def values(self) -> ValuesView[V]:
         ...
 
     def keys(self) -> Iterable[T]:
@@ -188,7 +185,7 @@ class Mapping(BaseMapping[T, V_co], Protocol[T, V_co]):
 
 
 @runtime_checkable
-class BaseMutableMapping(BaseMapping[T, V], Protocol[T, V]):
+class BaseMutableMapping[T, V](BaseMapping[T, V], Protocol):
     def __setitem__(self, key: T, value: V, /) -> None:
         ...
 
@@ -197,19 +194,19 @@ class BaseMutableMapping(BaseMapping[T, V], Protocol[T, V]):
 
 
 @runtime_checkable
-class SupportsKeysAndGetItem(SupportsGetItem[T_con, V_co], Protocol[T_con, V_co]):
-    def keys(self) -> Iterator[V_co]:
+class SupportsKeysAndGetItem[T, V](SupportsGetItem[T, V], Protocol):
+    def keys(self) -> Iterator[V]:
         ...
 
 
 @runtime_checkable
-class MutableMapping(BaseMutableMapping[T, V], Mapping[T, V], Protocol[T, V]):
+class MutableMapping[T, V](BaseMutableMapping[T, V], Mapping[T, V], Protocol):
     @overload
     def pop(self, item: T, /) -> V:
         ...
 
     @overload
-    def pop(self, item: T, default: T2, /) -> V | T2:
+    def pop[T2](self, item: T, default: T2, /) -> V | T2:
         ...
 
     def popitem(self) -> tuple[T, V]:

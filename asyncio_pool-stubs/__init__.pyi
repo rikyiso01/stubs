@@ -2,10 +2,9 @@ from asyncio import AbstractEventLoop, Future, Semaphore
 from collections.abc import Awaitable, Callable, Iterable
 from types import TracebackType
 from typing import Any, overload, Type
-from mte.typevar import T, V, K, T2
 from mte.protocols import AsyncContextManager
 
-_Callback = (
+type _Callback[T, V] = (
     Callable[[T], Any]
     | Callable[[T, tuple[Exception, TracebackType]], Any]
     | Callable[[T, tuple[Exception, TracebackType], V], Any]
@@ -21,14 +20,20 @@ class AioPool(AsyncContextManager[AioPool]):
     is_empty: bool
     is_full: bool
 
-    async def spawn(
-        self, coro: Awaitable[T], cb: _Callback[T, V] = ..., ctx: V = ...
-    ) -> Future[T]: ...
-    def spawn_n(
-        self, coro: Awaitable[T], cb: _Callback[T, V] = ..., ctx: V = ...
-    ) -> Future[T]: ...
+    async def spawn[
+        T, V
+    ](self, coro: Awaitable[T], cb: _Callback[T, V] = ..., ctx: V = ...) -> Future[
+        T
+    ]: ...
+    def spawn_n[
+        T, V
+    ](self, coro: Awaitable[T], cb: _Callback[T, V] = ..., ctx: V = ...) -> Future[
+        T
+    ]: ...
     exec = spawn
-    def map_n(
+    def map_n[
+        K, T, V
+    ](
         self,
         fn: Callable[[K], Awaitable[T]],
         iterable: Iterable[K],
@@ -36,7 +41,9 @@ class AioPool(AsyncContextManager[AioPool]):
         ctx: V = ...,
     ) -> list[Future[T]]: ...
     @overload
-    async def map(
+    async def map[
+        K, T, V
+    ](
         self,
         fn: Callable[[K], Awaitable[T]],
         iterable: Iterable[K],
@@ -44,7 +51,9 @@ class AioPool(AsyncContextManager[AioPool]):
         ctx: V = ...,
     ) -> list[T]: ...
     @overload
-    async def map(
+    async def map[
+        K, T, V, T2
+    ](
         self,
         fn: Callable[[K], Awaitable[T]],
         iterable: Iterable[K],

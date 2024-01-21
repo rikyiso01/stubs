@@ -264,7 +264,6 @@ def dumper(engine: Engine, file: str) -> Generator[None, None, None]:
 
 def schema():
     with dumper(engine, "out/create_schema.sql"):
-
         with Session(engine) as session:
             session.execute(text("drop schema if exists socialmarket cascade"))
             session.execute(text("create schema socialmarket"))

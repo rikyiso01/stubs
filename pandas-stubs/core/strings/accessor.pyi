@@ -1,8 +1,6 @@
 from pandas import Series
-from typing import Generic
-from mte.typevar import T
 
-class StringMethods(Generic[T]):
+class StringMethods[T]:
     def contains(self, pat: str) -> Series[T, bool]: ...
     def split(self, pat: str = ...) -> Series[T, list[str]]: ...
     def replace(self, pat: str, repl: str) -> Series[T, str]: ...
