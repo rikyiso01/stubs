@@ -7,14 +7,15 @@ def create_engine(
     url: str,
     *,
     echo: bool = ...,
-    future: Literal[True],
+    # future: Literal[True],
     connect_args: dict[str, str] = ...,
 ) -> Engine: ...
 def create_mock_engine(url: str, *, executor: Callable[..., Any]) -> Engine: ...
 
 Integer: int
+String=str
 
-def String(length: int = ...) -> str: ...
+# def String(length: int = ...) -> str: ...
 def CHAR(length: int = ...) -> str: ...
 def Numeric(precision: int = ..., scale: int = ...) -> int: ...
 
@@ -36,7 +37,7 @@ class Column:
         T
     ](
         cls,
-        type: T,
+        type: type[T],
         /,
         *,
         primary_key: Literal[False] = ...,
@@ -49,7 +50,7 @@ class Column:
         T
     ](
         cls,
-        type: T,
+        type: type[T],
         /,
         *,
         primary_key: Literal[True],
@@ -61,7 +62,7 @@ class Column:
         T
     ](
         cls,
-        type: T,
+        type: type[T],
         /,
         *,
         nullable: Literal[False],

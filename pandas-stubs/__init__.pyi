@@ -17,10 +17,17 @@ from datetime import datetime
 from pandas.core.arrays.categorical import Categorical
 from pandas.io.formats.style import Styler
 from pandas.core.indexes.multi import MultiIndex as MultiIndex
+from pathlib import Path
+
 
 def read_csv(
-    filepath_or_buffer: str, *, error_bad_lines: bool = ...
+    filepath_or_buffer: str | Path,
+    *,
+    error_bad_lines: bool = ...,
+    low_memory: bool = ...,
 ) -> DataFrame[str, int, Any]: ...
+def read_excel(io: str | Path) -> DataFrame[str, int, Any]: ...
+
 
 class Series[K, V]:
     @overload
@@ -71,9 +78,11 @@ class Series[K, V]:
     def __len__(self) -> int: ...
     def __contains__(self, item: K, /) -> bool: ...
     def __lt__(self, other: V | SeriesCompatible[K, V], /) -> Series[K, bool]: ...
+
     __gt__ = __lt__
     __ge__ = __lt__
     __le__ = __lt__
+
     def __eq__(self, other: Any, /) -> Series[K, bool]: ...
     def __ne__(self, other: Any, /) -> Series[K, bool]: ...
     def __array__(self) -> NDArray[V]: ...
@@ -92,11 +101,17 @@ class Series[K, V]:
     def std(self: SeriesLike[K, float]) -> float: ...
     def median(self: SeriesLike[K, float]) -> float: ...
     def max(self) -> V: ...
+
     min = max
+
     def isna(self) -> Series[K, bool]: ...
+
     isnull = isna
+
     def any(self) -> bool: ...
+
     all = any
+
     def copy(self) -> Series[K, V]: ...
     @property
     def shape(self) -> tuple[int]: ...
@@ -109,8 +124,10 @@ class Series[K, V]:
     def __and__[
         I: int, I2: int
     ](self: SeriesLike[K, I], other: SeriesCompatible[K, I2]) -> Series[K, I | I2]: ...
+
     __or__ = __and__
     __xor__ = __or__
+
     def __invert__[I: int](self: SeriesLike[K, I]) -> Series[K, I]: ...
     def mode(self) -> Series[int, V]: ...
     @property
@@ -132,7 +149,9 @@ class Series[K, V]:
     ](self: SeriesLike[K, C], other: SeriesCompatible[K, C2] | C2) -> Series[
         K, C | C2
     ]: ...
+
     __mul__ = __sub__
+
     def __truediv__[
         C: complex, C2: complex
     ](self: SeriesLike[K, C], other: SeriesCompatible[K, C2] | C2) -> Series[
@@ -176,7 +195,9 @@ class Series[K, V]:
     def index(self) -> Index[K]: ...
     def reindex[*TT](self, labels: MultiIndex[*TT]) -> Series[tuple[*TT], V]: ...
     def notna(self) -> Series[V, bool]: ...
+
     notnull = notna
+
 
 class DataFrame[K, K2, V]:
     @overload
@@ -243,10 +264,12 @@ class DataFrame[K, K2, V]:
     @overload
     def __getitem__(
         self,
-        item: slice
-        | SeriesCompatible[K2, bool]
-        | DataFrame[K, K2, bool]
-        | SeriesCompatible[Any, K],
+        item: (
+            slice
+            | SeriesCompatible[K2, bool]
+            | DataFrame[K, K2, bool]
+            | SeriesCompatible[Any, K]
+        ),
         /,
     ) -> DataFrame[K, K2, V]: ...
     @overload
@@ -258,11 +281,13 @@ class DataFrame[K, K2, V]:
     @overload
     def __setitem__(
         self,
-        item: slice
-        | K
-        | SeriesCompatible[K2, bool]
-        | DataFrame[K, K2, bool]
-        | SeriesCompatible[Any, K],
+        item: (
+            slice
+            | K
+            | SeriesCompatible[K2, bool]
+            | DataFrame[K, K2, bool]
+            | SeriesCompatible[Any, K]
+        ),
         value: SeriesCompatible[K2, V],
         /,
     ) -> None: ...
@@ -277,15 +302,19 @@ class DataFrame[K, K2, V]:
     def __lt__(
         self, other: V | SeriesCompatible[K, V] | DataFrame[K, K2, V], /
     ) -> DataFrame[K, K2, bool]: ...
+
     __gt__ = __lt__
     __ge__ = __lt__
     __le__ = __lt__
+
     def __eq__(self, other: Any, /) -> DataFrame[K, K2, bool]: ...
     def __ne__(self, other: Any, /) -> DataFrame[K, K2, bool]: ...
     @property
     def empty(self) -> bool: ...
     def any(self) -> Series[K, bool]: ...
+
     all = any
+
     def __len__(self) -> int: ...
     def __iter__(self) -> Iterator[K]: ...
     def __containes__(self, value: K, /) -> bool: ...
@@ -310,7 +339,9 @@ class DataFrame[K, K2, V]:
     def var(self: DataFrameLike[K, K2, float]) -> Series[K, float]: ...
     def std(self: DataFrameLike[K, K2, float]) -> Series[K, float]: ...
     def max(self) -> Series[K, V]: ...
+
     min = max
+
     def dropna(
         self,
         *,
@@ -339,7 +370,9 @@ class DataFrame[K, K2, V]:
     @property
     def shape(self) -> tuple[int, int]: ...
     def isna(self) -> DataFrame[K, K2, bool]: ...
+
     isnull = isna
+
     def sum(self: DataFrameLike[K, K2, V]) -> Series[K2, V | int]: ...
     def mode(self) -> DataFrame[K, int, V]: ...
     def groupby(
@@ -365,15 +398,19 @@ class DataFrame[K, K2, V]:
     ](self: DataFrameLike[K, K2, I], other: DataFrameLike[K, K2, I2]) -> DataFrame[
         K, K2, I | I2
     ]: ...
+
     __and__ = __or__
     __xor__ = __and__
+
     def __add__[
         C: complex, C2: complex
     ](self: DataFrameLike[K, K2, C], other: DataFrameLike[K, K2, C2]) -> DataFrame[
         K, K2, C | C2
     ]: ...
+
     __sub__ = __add__
     __mul__ = __add__
+
     def info(self) -> None: ...
     def fillna(
         self, value: DataFrameLike[K, K2, V] | SeriesCompatible[K, V] | V = ...
@@ -400,8 +437,12 @@ class DataFrame[K, K2, V]:
         self, subset: ArrayLike[K] = ..., keep: Literal["first", "last", False] = ...
     ) -> DataFrame[K, K2, bool]: ...
     def notna(self) -> DataFrame[K, K2, bool]: ...
+
     notnull = notna
-    def to_csv(self, filepath_or_buffer: str, *, index: bool = ...) -> None: ...
+
+    def to_csv(self, filepath_or_buffer: str | Path, *, index: bool = ...) -> None: ...
+    def iterrows(self) -> Iterator[tuple[K2, Series[K, V]]]: ...
+
 
 @overload
 def concat[
